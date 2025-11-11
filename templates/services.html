@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Our Services</h1>
+        <p>Comprehensive sustainable textile solutions for brands, businesses, and communities.</p>
+    </div>
+</section>
+
+<section class="services-section">
+    <div class="container">
+        {% for service in services %}
+        <article class="service-card" id="{{ service.id }}">
+            <div class="service-content">
+                <h2>{{ service.name }}</h2>
+                <p class="service-description">{{ service.description }}</p>
+                <p class="service-pricing"><strong>Pricing:</strong> {{ service.pricing }}</p>
+                
+                <details class="service-details">
+                    <summary>Request This Service</summary>
+                    <div class="service-form-container">
+                        <form method="POST" action="{{ url_for('main.services') }}" novalidate>
+                            {{ form.hidden_tag() }}
+                            
+                            <input type="hidden" name="service_name" value="{{ service.name }}">
+                            
+                            <div class="form-group">
+                                {{ form.name.label }}
+                                {{ form.name(class='form-control', required=true) }}
+                                {% if form.name.errors %}
+                                    <div class="form-errors">
+                                        {% for error in form.name.errors %}
+                                            <p class="error-message">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                {{ form.email.label }}
+                                {{ form.email(class='form-control', type='email', required=true) }}
+                                {% if form.email.errors %}
+                                    <div class="form-errors">
+                                        {% for error in form.email.errors %}
+                                            <p class="error-message">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                {{ form.phone.label }}
+                                {{ form.phone(class='form-control', type='tel') }}
+                                {% if form.phone.errors %}
+                                    <div class="form-errors">
+                                        {% for error in form.phone.errors %}
+                                            <p class="error-message">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                {{ form.company.label }}
+                                {{ form.company(class='form-control') }}
+                                {% if form.company.errors %}
+                                    <div class="form-errors">
+                                        {% for error in form.company.errors %}
+                                            <p class="error-message">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                {{ form.message.label }}
+                                {{ form.message(class='form-control', rows=4, required=true) }}
+                                {% if form.message.errors %}
+                                    <div class="form-errors">
+                                        {% for error in form.message.errors %}
+                                            <p class="error-message">{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Submit Request</button>
+                        </form>
+                    </div>
+                </details>
+            </div>
+        </article>
+        {% endfor %}
+        
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What types of textiles do you accept?</summary>
+                    <p>We accept all types of fabric including cotton, polyester, wool, and blended materials. Items can include clothing, bed linens, curtains, and other textile products.</p>
+                </details>
+                
+                <details class="faq-item">
+                    <summary>How much does fabric recycling cost?</summary>
+                    <p>For individuals and small organizations, collection is often free. For businesses, pricing depends on volume and location. Contact us for a custom quote.</p>
+                </details>
+                
+                <details class="faq-item">
+                    <summary>What is the minimum order for custom fabric?</summary>
+                    <p>Our minimum order for custom re-spun fabric is 100 meters. We can accommodate larger orders and provide volume discounts.</p>
+                </details>
+                
+                <details class="faq-item">
+                    <summary>How long does the recycling process take?</summary>
+                    <p>From collection to finished fabric, the process typically takes 4-8 weeks depending on volume and specifications.</p>
+                </details>
+                
+                <details class="faq-item">
+                    <summary>Can you help our school organize a collection drive?</summary>
+                    <p>Yes! We provide free support for educational institutions including collection bins, educational materials, and pickup services. Contact us to get started.</p>
+                </details>
+                
+                <details class="faq-item">
+                    <summary>Is recycled fabric quality comparable to new fabric?</summary>
+                    <p>Absolutely. Our re-spun fabrics meet or exceed industry standards for durability, appearance, and performance while being more sustainable.</p>
+                </details>
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock %}

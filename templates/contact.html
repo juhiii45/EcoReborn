@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>Get in touch with the Ecoreborn team. We'd love to hear from you!</p>
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <div class="contact-form-container">
+                <h2>Send Us a Message</h2>
+                <form method="POST" action="{{ url_for('main.contact') }}" enctype="multipart/form-data" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="form-group">
+                        {{ form.name.label }}
+                        {{ form.name(class='form-control', required=true, autofocus=true) }}
+                        {% if form.name.errors %}
+                            <div class="form-errors">
+                                {% for error in form.name.errors %}
+                                    <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.email.label }}
+                        {{ form.email(class='form-control', type='email', required=true) }}
+                        {% if form.email.errors %}
+                            <div class="form-errors">
+                                {% for error in form.email.errors %}
+                                    <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.subject.label }}
+                        {{ form.subject(class='form-control', required=true) }}
+                        {% if form.subject.errors %}
+                            <div class="form-errors">
+                                {% for error in form.subject.errors %}
+                                    <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.message.label }}
+                        {{ form.message(class='form-control', rows=6, required=true) }}
+                        {% if form.message.errors %}
+                            <div class="form-errors">
+                                {% for error in form.message.errors %}
+                                    <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.attachment.label }}
+                        {{ form.attachment(class='form-control-file') }}
+                        <small class="form-text">Allowed: PDF, DOC, DOCX, TXT, JPG, PNG, GIF (max 2MB)</small>
+                        {% if form.attachment.errors %}
+                            <div class="form-errors">
+                                {% for error in form.attachment.errors %}
+                                    <p class="error-message">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="contact-info-container">
+                <div class="contact-info-card">
+                    <h2>Contact Information</h2>
+                    
+                    <div class="info-item">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path d="M10 2C7 2 4 4.5 4 8C4 12 7 15 10 18C13 15 16 12 16 8C16 4.5 13 2 10 2Z"/>
+                                <circle cx="10" cy="8" r="2" fill="white"/>
+                            </svg>
+                            Address
+                        </h3>
+                        <address>
+                            <p>Ecoreborn HQ<br>
+                            Mumbai area (West)<br>
+                            India</p>
+                        </address>
+                    </div>
+                    
+                    <div class="info-item">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                                <path d="M3 3h14c.5 0 1 .5 1 1v12c0 .5-.5 1-1 1H3c-.5 0-1-.5-1-1V4c0-.5.5-1 1-1z"/>
+                                <path d="M17 4l-7 5-7-5"/>
+                            </svg>
+                            Email
+                        </h3>
+                        <p><a href="mailto:admin@ecoreborn.example">admin@ecoreborn.example</a></p>
+                    </div>
+                    
+                    <div class="info-item">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                                <circle cx="10" cy="10" r="8"/>
+                                <path d="M10 4v6l4 2"/>
+                            </svg>
+                            Business Hours
+                        </h3>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
+                        Saturday: 10:00 AM - 4:00 PM<br>
+                        Sunday: Closed</p>
+                    </div>
+                </div>
+                
+                <!-- Map Placeholder -->
+                <div class="map-container">
+                    <img src="{{ url_for('static', filename='images/map-placeholder.png') }}" 
+                         alt="Map showing Ecoreborn location in Mumbai, India" 
+                         class="map-image">
+                    <p class="map-caption"><a href="https://www.google.com/maps/place/Mumbai" target="_blank" rel="noopener">View on Google Maps</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

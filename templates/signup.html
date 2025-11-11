@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-card">
+            <h1>Sign Up</h1>
+            <p class="auth-subtitle">Create your Ecoreborn account</p>
+            
+            <form method="POST" action="{{ url_for('auth.signup') }}" novalidate>
+                {{ form.hidden_tag() }}
+                
+                <div class="form-group">
+                    {{ form.name.label }}
+                    {{ form.name(class='form-control', required=true, autofocus=true) }}
+                    {% if form.name.errors %}
+                        <div class="form-errors">
+                            {% for error in form.name.errors %}
+                                <p class="error-message">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.email.label }}
+                    {{ form.email(class='form-control', type='email', required=true) }}
+                    {% if form.email.errors %}
+                        <div class="form-errors">
+                            {% for error in form.email.errors %}
+                                <p class="error-message">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.password.label }}
+                    {{ form.password(class='form-control', required=true) }}
+                    <div class="password-requirements">
+                        <small class="form-text"><strong>Password Requirements:</strong></small>
+                        <ul class="requirements-list">
+                            <li>✓ At least 8 characters long</li>
+                            <li>✓ At least one uppercase letter (A-Z)</li>
+                            <li>✓ At least one lowercase letter (a-z)</li>
+                            <li>✓ At least one number (0-9)</li>
+                            <li>✓ At least one special character (@$!%*?&#)</li>
+                        </ul>
+                    </div>
+                    {% if form.password.errors %}
+                        <div class="form-errors">
+                            {% for error in form.password.errors %}
+                                <p class="error-message">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    {{ form.confirm_password.label }}
+                    {{ form.confirm_password(class='form-control', required=true) }}
+                    {% if form.confirm_password.errors %}
+                        <div class="form-errors">
+                            {% for error in form.confirm_password.errors %}
+                                <p class="error-message">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <button type="submit" class="btn-primary btn-full">Create Account</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

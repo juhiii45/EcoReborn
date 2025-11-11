@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="dashboard-section">
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Welcome, {{ current_user.name }}!</h1>
+            <p>Manage your Ecoreborn account and view your service requests.</p>
+        </div>
+        
+        <div class="dashboard-grid">
+            <!-- User Info Card -->
+            <div class="dashboard-card">
+                <h2>Your Account</h2>
+                <div class="account-info">
+                    <p><strong>Name:</strong> {{ current_user.name }}</p>
+                    <p><strong>Email:</strong> {{ current_user.email }}</p>
+                    <p><strong>Member since:</strong> Recently joined</p>
+                </div>
+            </div>
+            
+            <!-- Service Requests -->
+            <div class="dashboard-card dashboard-card-wide">
+                <h2>Your Service Requests</h2>
+                
+                {% if service_requests %}
+                    <div class="requests-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for request in service_requests %}
+                                <tr>
+                                    <td>{{ request.service_name }}</td>
+                                    <td>
+                                        <span class="status-badge status-{{ request.status }}">
+                                            {{ request.status|capitalize }}
+                                        </span>
+                                    </td>
+                                    <td>{{ request.created_at|datetime('%b %d, %Y') }}</td>
+                                    <td>
+                                        <details>
+                                            <summary>View</summary>
+                                            <div class="request-details">
+                                                <p><strong>Company:</strong> {{ request.company or 'N/A' }}</p>
+                                                <p><strong>Phone:</strong> {{ request.phone or 'N/A' }}</p>
+                                                <p><strong>Message:</strong></p>
+                                                <p>{{ request.message }}</p>
+                                            </div>
+                                        </details>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <p>You haven't submitted any service requests yet.</p>
+                        <a href="{{ url_for('main.services') }}" class="btn-primary">Browse Services</a>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="dashboard-card">
+                <h2>Quick Actions</h2>
+                <ul class="quick-actions">
+                    <li><a href="{{ url_for('main.services') }}">Request a Service</a></li>
+                    <li><a href="{{ url_for('main.contact') }}">Contact Support</a></li>
+                    <li><a href="{{ url_for('main.home') }}">Learn About Our Process</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

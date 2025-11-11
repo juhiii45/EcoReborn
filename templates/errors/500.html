@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="error-section">
+    <div class="container">
+        <div class="error-content">
+            <h1 class="error-code">500</h1>
+            <h2>Server Error</h2>
+            <p>Sorry, something went wrong on our end. We're working to fix it.</p>
+            <div class="error-actions">
+                <a href="{{ url_for('main.home') }}" class="btn-primary">Go Home</a>
+                <a href="{{ url_for('main.contact') }}" class="btn-secondary">Report Issue</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
