@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /dashboard
-Disallow: /logout
-Disallow: /reset-password/
-
-Sitemap: http://localhost:5000/sitemap.xml
